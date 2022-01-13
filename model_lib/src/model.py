@@ -7,8 +7,6 @@ from typing import Dict, List
 from io import StringIO
 from lime import lime_tabular
 from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
-
 
 """
 The required output structure for a successful inference run for a models is the following JSON:
@@ -97,6 +95,7 @@ def get_failure_json_structure(error_message: str) -> Dict[str, bytes]:
 
     return {"error": json.dumps(error_json).encode()}
 
+# define data paths
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_PATH = os.path.join(ROOT_DIR, "random_forest.joblib")
 TRAIN_DATA_PATH = os.path.join(ROOT_DIR, "winequality.csv")
@@ -173,6 +172,7 @@ class TabularClassifier:
             ]
         }      
 
+        # compute explanations
         exp_list, exp_map = self.explain(input_csv_contents, self.model.predict_proba)
         explanation_result = {
             "featureImportance": [
@@ -184,6 +184,7 @@ class TabularClassifier:
             ]
         }          
 
+        # input drift in this case is none
         drift_result = None
 
         # Load the results that your model produced into the standardized output format. If you model ran into
