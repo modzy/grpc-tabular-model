@@ -10,7 +10,7 @@ This is a gRPC + HTTP/2 implementation of the [Open Source Vader Sentiment Analy
 
 Clone the repository:
 
-```git clone https://github.com/modzy/grpc-sentiment-analysis.git```
+```git clone https://github.com/modzy/grpc-tabular-model.git```
 
 ## Usage
 
@@ -22,66 +22,21 @@ The following usage instructions demonstrate how to build the container image, r
 
 From the parent directory of this repository, build the container image.
 
-```docker build -t grpc-sentiment-analysis .```
+```docker build -t grpc-tabular-model .```
 
 Run the container interactively.
 
-```docker run -p 45000:45000 -it grpc-sentiment-analysis:latest```
+```docker run -p 45000:45000 -it grpc-tabular-model:latest```
 
 #### Run a test inside the container
 
-Open a different terminal, and submit a test using poetry and the `grpc_model.src.model_client` module
-
-```poetry run python -m grpc_model.src.model_client``` 
-
-## Additional Resources
-
-### Managing Dependencies Via a Virtual Environment
-
-This project template uses [Poetry](https://python-poetry.org/) in order to manage the Python dependencies that you 
-use within the project. If this is your first time using this tool, you can follow the instructions provided
-[here](https://python-poetry.org/docs/#installation) to install it.
-
-There are two types of dependencies: core dependencies and development dependencies. Core dependencies are those that
-are required to be installed for the main, production release of your project or package. Development dependencies are
-auxiliary packages that are useful in aiding in providing functionality such as formatting, documentation or
-type-checking, but are non-essential for the production release.
-
-For each dependency you come across, make a determination on whether it is a core or development dependency, and add it
-to the pyproject.toml file from the command line using the following command, where the `-D` flag is to be used only for
-development dependencies.
-```
-poetry add [-D] <name-of-dependency>
-```
-
-When you are ready to run your code and have added all your dependencies, you can perform a `poetry lock` in order to
-reproducibly fix your dependency versions. This will use the pyproject.toml file to crease a poetry.lock file. Then, in
-order to run your code, you can use the following commands to set up a virtual environment and then run your code
-within the virtual envrionment. The optional `--no-dev` flag indicates that you only wish to install core dependencies.
-```
-poetry install [--no-dev]
-poetry run <your-command>
-```
-
-### Initializing Pre-Commit Hooks
-
-This repository uses pre-commit hooks in order to assist you in maintaining a uniform and idiomatic code style.
-If this is your first time using pre-commit hooks you can install the framework [here](https://pre-commit.com/#installation).
-Once pre-commit is installed, all you need to do is execute the following command from the repository root:
-```
-pre-commit install
-```
-
-If you want to execute the pre-commit hooks at a time other than during the actual git commit, you can run:
-```
-pre-commit run --all-files
-```
-
-
-### Exporting current dependencies when ready to release
-
-If you are developing within a virtual environment for convenience and reproducibility but would like to run directly
-on top of pip inside of your docker container to have a very lightweight image, you can use the following instructions
-in order to extract a `requirements.txt` from your virtual environment.
+Open a different terminal, create a Python virtual environment, and activate the environment
 
 ```
+python -m venv ./tabular-model
+source tabular-model/bin/activate
+```
+
+Submit a test using the `grpc_model.src.model_client` module from within the virtual environment
+
+```python -m grpc_model.src.model_client``` 
