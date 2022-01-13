@@ -4,7 +4,7 @@
 
 ### gRPC and Modzy Container Specification
 
-This is a gRPC + HTTP/2 implementation of the [Open Source Vader Sentiment Analysis model](https://github.com/cjhutto/vaderSentiment) and is derived from Modzy's [gRPC Python Model Template](https://github.com/modzy/grpc-model-template).
+This is a gRPC + HTTP/2 implementation of the [Scikit Learn Classification tutorial](https://towardsdatascience.com/lime-how-to-interpret-machine-learning-models-with-python-94b0e7e4432e) and is derived from Modzy's [gRPC Python Model Template](https://github.com/modzy/grpc-model-template).
 
 ## Installation
 
