@@ -191,41 +191,7 @@ class TabularClassifier:
         # function in order to produce an error output.
         output_item = get_success_json_structure(inference_result, explanation_result, drift_result)
 
-        return output_item
-
-        # This code should take a single discrete input for the model and return an output
-        # raise NotImplementedError
-
-    def process(input_bytes,context):
-        inputs = pd.read_csv(StringIO(str(input_bytes, "utf-8")))
-        preds = context["model"].predict_proba(inputs)
-        
-        inference_result = {
-            "classPredictions": [
-                {"row": i+1, "class": context["classes"][np.argmax(pred)], "score": np.max(pred)} for i, pred in enumerate(preds)
-            ]
-        }
-        
-        exp_list, exp_map = explain(X_test, context["train_data"], context["model"].predict_proba)
-        explainable_results = {
-            "featureImportance": [
-                {
-                    "feature": context["feature_labels"][exp_map[1][i][0]],
-                    "condition": exp_list[i][0],
-                    "score": exp_list[i][1]
-                } for i in range(len(exp_list))
-            ]
-        }
-        
-        structured_output = {
-            "data": {
-                "result": inference_result,
-                "explanation": explainable_results,
-                "drift": None,
-            }
-        }
-        
-        return structured_output    
+        return output_item 
     
     def handle_input_batch(self, model_inputs: List[Dict[str, bytes]], detect_drift, explain) -> List[Dict[str, bytes]]:
         """
